@@ -5,8 +5,8 @@
     let screenW : Ref<number> = ref(window.innerWidth);
     let screenH : Ref<number> = ref(window.innerHeight);
     const animationSpeed = screenW.value/45;
-
-    
+    const fadeSpeed = 0.1;
+    const contentTransparency = ref(0);
 
     function resetPoints(){
         mainPoints.p1x.value = 0;
@@ -71,7 +71,9 @@
 
         if(mainPoints.p3x.value <= (screenW.value/2)){
             requestAnimationFrame(animateMainPath);
-        };
+        }else{
+            animateContent();
+        }
     }
 
     //decorative teal path
@@ -136,6 +138,16 @@
         screenH.value = window.innerHeight;
     }
 
+    function animateContent(){
+        contentTransparency.value += fadeSpeed;
+
+        if(contentTransparency.value < 1){
+            requestAnimationFrame(animateContent);
+        }else{
+            contentTransparency.value = 1;
+        }
+    }
+
     //on page load reset animation and play it
     onMounted(() => {
         resetPoints();
@@ -151,12 +163,22 @@
 
 <template>
     <div class="flex w-screen h-screen -z-10 overflow-hidden bg-banner-image">
-        <div class="flex flex-auto  w-full h-full">
-            <svg height="100%" width="100%">
+        
+        <div class="static flex flex-auto  w-full h-full">
+            <svg class=" absolute top-0 left-0" height="100%" width="100%">
                 <path :d="purplepath" fill="#F2DCF1AA"/>
                 <path :d="tealpath" fill="#B0D1D9AA"/>
                 <path :d="mainpath" fill="#010D00EE"/>
             </svg>
+            <div class="absolute top-0 left-0 flex flex-col w-1/2 h-full items-center justify-center" :style="{opacity: contentTransparency}">
+                <div class="flex w-1/2 h-1/2 rounded-full bg-main-headshot-image bg-center bg-cover" ></div>
+                <h3 class="text-5xl text-white">Jordan Burger</h3>
+                <h5 class="text-3xl text-white">Audio Engineer</h5>
+            </div>
         </div>
     </div>
 </template>
+
+<style>
+
+</style>
