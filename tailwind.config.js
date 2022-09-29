@@ -14,6 +14,9 @@ module.exports = {
         'moog-dark-tan': '#BF9663',
         'moog-tan': '#F2C3A7',
       },
+      backgroundImage: {
+        'banner-image': "url(/public/banner.jpg)"
+      },
     },
   },
   plugins: [],
