@@ -31,7 +31,7 @@
                         ' L' + this.points.p5x.value + ' ' + this.points.p5y.value + ' Z');
         }
 
-        public reset(){
+        public reset(stopPoint : number){
 
             this.path.value = 'M' + this.points.p1x.value + ' ' + this.points.p1y.value +
                         ' L' + this.points.p2x.value + ' ' + this.points.p2y.value +
@@ -51,7 +51,7 @@
             this.points.p5y.value = screenH.value;
 
             this.easingRate = 0.1;
-
+            this.stopPoint = stopPoint;
         }
 
         animate = () => {
@@ -85,9 +85,9 @@
     const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
     function resetPoints(){
-        mainPentagon.reset();
-        tealPentagon.reset();
-        purplePentagon.reset();
+        mainPentagon.reset(screenW.value/2);
+        tealPentagon.reset(screenW.value/2 + 100);
+        purplePentagon.reset(screenW.value/2 + 200);
     };
 
     async function animatePoints(){
@@ -101,6 +101,9 @@
     function onScreenResize(){
         screenW.value = window.innerWidth;
         screenH.value = window.innerHeight;
+        resetPoints();
+        animatePoints();
+        animateContent();
     }
 
     //animates the fade in of the page content

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <nav class="flex flex-row mx-6 fixed w-screen z-10">
+    <nav class="flex flex-row px-6 fixed w-screen z-10">
         <div class=" bg-moog-tan nav-item">
           <font-awesome-icon icon="fa-solid fa-house" class="-skew-x-[30deg]"/>
         </div>
