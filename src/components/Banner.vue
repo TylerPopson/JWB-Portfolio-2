@@ -4,27 +4,11 @@
 
     //define a class to handle the animated background pentagons
     class Pentagon{
-        points :   {p1x: Ref<number>, 
-                    p1y: Ref<number>, 
-                    p2x: Ref<number>, 
-                    p2y: Ref<number>, 
-                    p3x: Ref<number>, 
-                    p3y: Ref<number>, 
-                    p4x: Ref<number>, 
-                    p4y: Ref<number>, 
-                    p5x: Ref<number>, 
-                    p5y: Ref<number>} = {p1x: ref(0),
-                p1y: ref(0),
-                p2x: ref(0),
-                p2y: ref(0),
-                p3x: ref(200),
-                p3y: ref(screenH.value/2),
-                p4x: ref(0),
-                p4y: ref(screenH.value),
-                p5x: ref(0),
-                p5y: ref(screenH.value),};
-        stopPoint : number = 0;
-        path : Ref<string> = ref('');
+        points : {p1x: Ref<number>, p1y: Ref<number>, p2x: Ref<number>, p2y: Ref<number>, p3x: Ref<number>, p3y: Ref<number>, p4x: Ref<number>, p4y: Ref<number>, p5x: Ref<number>, p5y: Ref<number>};
+        stopPoint : number;
+        path : Ref<string>;
+        animationSpeed : number = screenW.value/400;
+        easingRate : number = 0.1;
 
         constructor(stopPoint: number){
             this.points = {
@@ -66,13 +50,18 @@
             this.points.p5x.value = 0;
             this.points.p5y.value = screenH.value;
 
+            this.easingRate = 0.1;
+
         }
 
         animate = () => {
+
+            this.easingRate += 0.01;
+
             this.path.value = 'M' + this.points.p1x.value + ' ' + this.points.p1y.value +
-                         ' L' + (this.points.p2x.value+=animationSpeed) + ' ' + this.points.p2y.value +
-                         ' L' + (this.points.p3x.value+=animationSpeed) + ' ' + this.points.p3y.value +
-                         ' L' + (this.points.p4x.value+=animationSpeed) + ' ' + this.points.p4y.value +
+                         ' L' + (this.points.p2x.value+=(this.animationSpeed/this.easingRate)) + ' ' + this.points.p2y.value +
+                         ' L' + (this.points.p3x.value+=(this.animationSpeed/this.easingRate)) + ' ' + this.points.p3y.value +
+                         ' L' + (this.points.p4x.value+=(this.animationSpeed/this.easingRate)) + ' ' + this.points.p4y.value +
                          ' L' + this.points.p5x.value + ' ' + this.points.p5y.value + ' Z';
 
             if(this.points.p3x.value <= this.stopPoint){
@@ -86,7 +75,6 @@
     let screenH : Ref<number> = ref(window.innerHeight);
     const fadeSpeed = 0.1;
     const contentTransparency = ref(0);
-    let animationSpeed = screenW.value/45;
     
     //define instances of the packground pentagons
     let mainPentagon : Pentagon = new Pentagon(screenW.value/2);
