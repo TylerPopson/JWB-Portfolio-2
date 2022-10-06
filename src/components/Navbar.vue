@@ -14,9 +14,11 @@
           <font-awesome-icon icon="fa-solid fa-user" class="-skew-x-[30deg]"/>
         </div>
       </a>
-        <div class=" bg-moog-lavender nav-item">
+      <a href='#listen' class="bg-moog-lavender nav-item">
+        <div>
           <font-awesome-icon icon="fa-solid fa-headphones" class="-skew-x-[30deg]"/>
         </div>
+      </a>
         <div class=" bg-moog-blue nav-item">
           <font-awesome-icon icon="fa-solid fa-envelope" class="-skew-x-[30deg]"/>
         </div>

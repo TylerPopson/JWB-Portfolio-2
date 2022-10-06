@@ -5,7 +5,7 @@ import type { Ref } from 'vue';
 
 <template>
     <div id="about" class="flex flex-col md:flex-row bg-moog-black w-screen md:h-[80vh] overflow-hidden pb-10 md:pb-0">
-        <div class="flex flex-auto w-screen md:w-1/3 h-32 md:h-full bg-moog-lavender items-center justify-center">
+        <div class="flex flex-auto w-screen md:w-1/3 h-32 md:h-full bg-moog-blue items-center justify-center">
             <h1 class="text-4xl">About me</h1>
         </div>
         <div class="flex flex-col flex-auto w-screen md:w-2/3  items-center justify-center">
@@ -17,7 +17,6 @@ import type { Ref } from 'vue';
                 <div class="bg-jordan-working-image bg-cover bg-center h-52 w-full mb-5 md:mr-12"></div>
                 <div class="bg-badge-image bg-cover bg-center h-52 w-full"></div>
             </div>
-            
         </div>
     </div>
 </template>
