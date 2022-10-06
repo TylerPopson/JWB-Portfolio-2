@@ -136,8 +136,8 @@
                 <path :d="tealPentagon.path.value" fill="#B0D1D9AA"/>
                 <path :d="mainPentagon.path.value" fill="#010D00EE"/>
             </svg>
-            <div class="absolute top-0 left-0 flex flex-col w-1/2 h-full items-center justify-center" :style="{opacity: contentTransparency}">
-                <div class="flex w-1/2 h-1/2 rounded-full bg-main-headshot-image bg-center bg-cover" ></div>
+            <div class="absolute top-0 left-0 flex flex-col w-full md:w-1/2 h-full items-center justify-center" :style="{opacity: contentTransparency}">
+                <div class="flex w-5/6 md:w-1/2  aspect-square rounded-full bg-main-headshot-image bg-center bg-cover" ></div>
                 <h3 class="text-5xl text-white">Jordan Burger</h3>
                 <h5 class="text-3xl text-white">Audio Engineer</h5>
             </div>
