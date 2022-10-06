@@ -4,6 +4,7 @@ import Navbar from './components/Navbar.vue';
 import Banner from './components/Banner.vue';
 import About  from './components/About.vue';
 import Listen from './components/Listen.vue';
+import Contact from './components/Contact.vue'
 </script>
 
 <template>
@@ -12,5 +13,6 @@ import Listen from './components/Listen.vue';
     <Banner />
     <About />
     <Listen />
+    <Contact />
   </div>
 </template>

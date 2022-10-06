@@ -128,13 +128,13 @@
 </script>
 
 <template>
-    <div id="home" class="flex w-screen h-screen -z-10 overflow-hidden bg-banner-image">
+    <div id="home" class="flex w-screen h-screen -z-10 overflow-hidden bg-banner-image bg-fixed">
         
         <div class="static flex flex-auto  w-full h-full">
             <svg class=" absolute top-0 left-0" height="100%" width="100%">
                 <path :d="purplePentagon.path.value" fill="#F2DCF1AA"/>
                 <path :d="tealPentagon.path.value" fill="#B0D1D9AA"/>
-                <path :d="mainPentagon.path.value" fill="#010D00EE"/>
+                <path :d="mainPentagon.path.value" fill="#010D00"/>
             </svg>
             <div class="absolute top-0 left-0 flex flex-col w-full md:w-1/2 h-full items-center justify-center" :style="{opacity: contentTransparency}">
                 <div class="flex w-5/6 md:w-1/2  aspect-square rounded-full bg-main-headshot-image bg-center bg-cover" ></div>
