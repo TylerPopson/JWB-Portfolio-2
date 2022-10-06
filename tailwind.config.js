@@ -15,8 +15,11 @@ module.exports = {
         'moog-tan': '#F2C3A7',
       },
       backgroundImage: {
-        'banner-image': "url(/public/banner.jpg)",
-        'main-headshot-image': "url(/public/headshot.jpg)",
+        'banner-image': "url(/banner.jpg)",
+        'main-headshot-image': "url(/headshot.jpg)",
+        'jordan-working-image': "url(/jordan_working.jpg)",
+        'piano-image': "url(/piano.jpg)",
+        'badge-image': "url(/badge.jpg)",
       },
     },
   },
