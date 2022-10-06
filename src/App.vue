@@ -6,8 +6,9 @@ import About  from './components/About.vue';
 </script>
 
 <template>
-  
-  <Navbar />
-  <Banner />
-  <About />
+  <div id="app" class="scroll-smooth">
+    <Navbar />
+    <Banner class="home"/>
+    <About class="about"/>
+  </div>
 </template>

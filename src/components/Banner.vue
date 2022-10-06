@@ -128,7 +128,7 @@
 </script>
 
 <template>
-    <div class="flex w-screen h-screen -z-10 overflow-hidden bg-banner-image">
+    <div id="home" class="flex w-screen h-screen -z-10 overflow-hidden bg-banner-image">
         
         <div class="static flex flex-auto  w-full h-full">
             <svg class=" absolute top-0 left-0" height="100%" width="100%">

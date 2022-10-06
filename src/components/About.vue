@@ -4,7 +4,7 @@ import type { Ref } from 'vue';
 </script>
 
 <template>
-    <div class="flex flex-col md:flex-row bg-moog-black w-screen md:h-[80vh] overflow-hidden pb-10 md:pb-0">
+    <div id="about" class="flex flex-col md:flex-row bg-moog-black w-screen md:h-[80vh] overflow-hidden pb-10 md:pb-0">
         <div class="flex flex-auto w-screen md:w-1/3 h-32 md:h-full bg-moog-lavender items-center justify-center">
             <h1 class="text-4xl">About me</h1>
         </div>
