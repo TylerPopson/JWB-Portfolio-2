@@ -8,10 +8,10 @@
             <iframe class="" style="border-radius:12px" src="https://open.spotify.com/embed/album/5FCefVJ1ACpDxruisklkE3?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
             <iframe class="" style="border-radius:12px" src="https://open.spotify.com/embed/album/5PJspByunI4lcrEwcOcvv4?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
             <div class="flex flex-col md:flex-row w-full items-center justify-center">
-                <a href='https://soundcloud.com/jordan-burger-474132049' target="_blank" class="text-white hover:text-moog-lavender w-full md:w-1/2 text-center text-9xl">
+                <a href='https://soundcloud.com/jordan-burger-474132049' target="_blank" class="text-white hover:text-moog-lavender w-full md:w-1/2 text-center text-9xl transition-colors duration-300">
                     <font-awesome-icon icon="fa-brands fa-soundcloud" class=""/>
                 </a>
-                <a href='' target="_blank" class="text-white hover:text-moog-blue w-full md:w1/2 text-center text-9xl">
+                <a href='' target="_blank" class="text-white hover:text-moog-blue w-full md:w1/2 text-center text-9xl transition-colors duration-300">
                     <font-awesome-icon icon="fa-brands fa-spotify" class=""/>
                 </a>
             </div>
