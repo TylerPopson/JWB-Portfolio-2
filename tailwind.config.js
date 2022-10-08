@@ -21,6 +21,9 @@ module.exports = {
         'piano-image': "url(/piano.jpg)",
         'badge-image': "url(/badge.jpg)",
       },
+      fontFamily:{
+        overpassRegular:["overpass-regular"]
+      }
     },
   },
   plugins: [],

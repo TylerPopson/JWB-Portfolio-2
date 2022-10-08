@@ -11,3 +11,8 @@
         transition-all hover:text-white
     }
 }
+
+@font-face {
+    font-family: "Overpass-regular";
+    src: url(/public/static/Overpass-Regular.ttf);
+}

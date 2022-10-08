@@ -11,7 +11,11 @@
                 <a href='https://soundcloud.com/jordan-burger-474132049' target="_blank" class="text-white hover:text-moog-lavender w-full md:w-1/2 text-center text-9xl transition-colors duration-300">
                     <font-awesome-icon icon="fa-brands fa-soundcloud" class=""/>
                 </a>
+<<<<<<< Updated upstream
                 <a href='' target="_blank" class="text-white hover:text-moog-blue w-full md:w1/2 text-center text-9xl transition-colors duration-300">
+=======
+                <a href='' target="_blank" class="text-white hover:text-moog-blue w-full md:w-1/2 text-center text-9xl">
+>>>>>>> Stashed changes
                     <font-awesome-icon icon="fa-brands fa-spotify" class=""/>
                 </a>
             </div>
