@@ -20,6 +20,7 @@ module.exports = {
         'jordan-working-image': "url(/jordan_working.jpg)",
         'piano-image': "url(/piano.jpg)",
         'badge-image': "url(/badge.jpg)",
+        'jordan-badge-image': "url(/jordan_badge.jpg)"
       },
       fontFamily:{
         overpassRegular:["overpass-regular"],
