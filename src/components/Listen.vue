@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="flex w-screen md:w-1/3 h-32 md:h-full bg-moog-lavender items-center justify-center">
-            <h1 class="text-4xl">Listen</h1>
+            <h1 class="text-4xl font-overpassBold">Listen</h1>
         </div>
     </div>
 </template>

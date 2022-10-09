@@ -16,3 +16,8 @@
     font-family: "Overpass-regular";
     src: url(/public/static/Overpass-Regular.ttf);
 }
+
+@font-face {
+    font-family: "Overpass-bold";
+    src: url(/public/static/Overpass-Bold.ttf);
+}

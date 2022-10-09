@@ -6,7 +6,7 @@ import type { Ref } from 'vue';
 <template>
     <div id="about" class="flex flex-col md:flex-row bg-moog-black w-screen md:h-[80vh] overflow-hidden pb-10 md:pb-0">
         <div class="flex flex-auto w-screen md:w-1/3 h-32 md:h-full bg-moog-blue items-center justify-center">
-            <h1 class="text-4xl">About me</h1>
+            <h1 class="text-4xl font-overpassBold">About me</h1>
         </div>
         <div class="flex flex-col flex-auto w-screen md:w-2/3  items-center justify-center">
             <p class="text-md text-white px-5 md:px-36 my-10 md:my-0 text-center ">

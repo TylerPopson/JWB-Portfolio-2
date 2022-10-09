@@ -22,7 +22,8 @@ module.exports = {
         'badge-image': "url(/badge.jpg)",
       },
       fontFamily:{
-        overpassRegular:["overpass-regular"]
+        overpassRegular:["overpass-regular"],
+        overpassBold:["overpass-bold"],
       }
     },
   },

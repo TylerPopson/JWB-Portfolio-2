@@ -8,7 +8,7 @@ import Contact from './components/Contact.vue'
 </script>
 
 <template>
-  <div id="app" class="scroll-smooth">
+  <div id="app" class="scroll-smooth font-overpassRegular">
     <Navbar />
     <Banner />
     <About />
