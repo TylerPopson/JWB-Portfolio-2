@@ -1,5 +1,15 @@
 <script setup lang="ts">
 
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    let element = document.getElementById('spotify-player');
+    let options = {
+      uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
+    };
+    let callback = (EmbedController) => {};
+    IFrameAPI.createController(element, options, callback);
+};
+
+
 </script>
 
 <template>
@@ -8,6 +18,10 @@
 
             <iframe class="" style="border-radius:12px" src="https://open.spotify.com/embed/album/5FCefVJ1ACpDxruisklkE3?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
             <iframe class="" style="border-radius:12px" src="https://open.spotify.com/embed/album/5PJspByunI4lcrEwcOcvv4?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+            <div id="spotify-player">
+
+            </div>
             
             <div class="flex flex-col md:flex-row w-full items-center justify-center">
 
@@ -27,4 +41,5 @@
         </div>
 
     </div>
+    
 </template>

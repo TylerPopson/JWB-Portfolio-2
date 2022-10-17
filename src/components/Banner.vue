@@ -9,6 +9,11 @@
         path : Ref<string>;
         animationSpeed : number = screenW.value/400;
         easingRate : number = 0.1;
+        fps: number = 30;
+        now: any;
+        then: any = Date.now();
+        interval: any = 1000/this.fps;
+        delta: any;
 
         constructor(stopPoint: number){
             this.points = {
@@ -52,21 +57,47 @@
 
             this.easingRate = 0.1;
             this.stopPoint = stopPoint;
+            this.fps = 30;
         }
 
         animate = () => {
 
-            this.easingRate += 0.01;
-
-            this.path.value = 'M' + this.points.p1x.value + ' ' + this.points.p1y.value +
-                         ' L' + (this.points.p2x.value+=(this.animationSpeed/this.easingRate)) + ' ' + this.points.p2y.value +
-                         ' L' + (this.points.p3x.value+=(this.animationSpeed/this.easingRate)) + ' ' + this.points.p3y.value +
-                         ' L' + (this.points.p4x.value+=(this.animationSpeed/this.easingRate)) + ' ' + this.points.p4y.value +
-                         ' L' + this.points.p5x.value + ' ' + this.points.p5y.value + ' Z';
-
             if(this.points.p3x.value <= this.stopPoint){
                 requestAnimationFrame(this.animate);
             }
+
+            this.now = Date.now();
+            this.delta = this.now - this.then;
+            
+            if (this.delta > this.interval) {
+                // update time stuffs
+                
+                // Just `then = now` is not enough.
+                // Lets say we set fps at 10 which means
+                // each frame must take 100ms
+                // Now frame executes in 16ms (60fps) so
+                // the loop iterates 7 times (16*7 = 112ms) until
+                // delta > interval === true
+                // Eventually this lowers down the FPS as
+                // 112*10 = 1120ms (NOT 1000ms).
+                // So we have to get rid of that extra 12ms
+                // by subtracting delta (112) % interval (100).
+                // Hope that makes sense.
+                
+                this.then = this.now - (this.delta % this.interval);
+                
+                this.easingRate += 0.01;
+
+                this.path.value = 'M' + this.points.p1x.value + ' ' + this.points.p1y.value +
+                            ' L' + (this.points.p2x.value+=(this.animationSpeed/this.easingRate)) + ' ' + this.points.p2y.value +
+                            ' L' + (this.points.p3x.value+=(this.animationSpeed/this.easingRate)) + ' ' + this.points.p3y.value +
+                            ' L' + (this.points.p4x.value+=(this.animationSpeed/this.easingRate)) + ' ' + this.points.p4y.value +
+                            ' L' + this.points.p5x.value + ' ' + this.points.p5y.value + ' Z';
+
+                
+            }
+
+            
 
         }
     }
