@@ -18,5 +18,4 @@ import Contact from './components/Contact.vue'
 </template>
 
 <style>
-  @import url('https://fonts.google.com/specimen/Overpass?query=overpass');
 </style>
