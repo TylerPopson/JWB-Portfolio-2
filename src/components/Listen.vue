@@ -1,17 +1,20 @@
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
     import type { Ref } from 'vue';
+    impo
     type point = {x: Ref<number>, y: Ref<number>};
 
     const variance:number = 100;
     const visualizer: Ref<bar[]> = ref([]);
     let frame:HTMLElement | null = null;
-    let fps: number = 10;
+    let fps: number = 3;
     let now: any;
     let then: any = Date.now();
-    let interval: any = 1000/fps;
-    let delta: any;
+    let interval: number = 1000/fps;
+    let delta: number;
     let animateElem = document.querySelector('animate');
+
+    let elapsed: number = 0;
     
 
     class bar{
@@ -41,25 +44,34 @@
     }
 
     function animateVisualizer(){
-        
-        requestAnimationFrame(animateVisualizer);
 
         now = Date.now();
         delta = now - then;
 
-        if (delta > interval) {
+        elapsed += delta;
+        //visualizerUpdateCounter += delta;
+
+        if (elapsed >= interval) {
+
             for (let i: number = 0; i<visualizer.value.length; i++){
                 // visualizer.value[i].points.p1.y += 1;
                 // visualizer.value[i].points.p2.y += 1;
 
-                // visualizer.value[i].points.p2.x = Math.random()*30-15 + Math.sin(i* (Math.PI/25))*100+100 ;
 
-                // if(visualizer.value[i].points.p1.y > frame.clientHeight){
-                //     visualizer.value[i].points.p1.y = 0;
-                //     visualizer.value[i].points.p2.y = 0;
-                // }
+                visualizer.value[i].points.p2.x = Math.random()*30-15 + Math.sin(i* (Math.PI/25))*100+100 ;
+
+                if(visualizer.value[i].points.p1.y > frame.clientHeight){
+                    visualizer.value[i].points.p1.y = 0;
+                    visualizer.value[i].points.p2.y = 0;
+                }
             }
+
+            elapsed = 0;
+
         }
+
+        then = now;
+        requestAnimationFrame(animateVisualizer);
     }
 
     function rand(){
@@ -77,11 +89,122 @@
             for (let i = 0; i < 100; i++) {
                 visualizer.value.push(new bar(i, i * (frame.clientHeight / 100), "#000000"));
             }
-            //animateVisualizer();
-            animateElem = document.querySelector('animate');
-            animateElem.addEventListener('endEvent', rand)
+            animateVisualizer();
         }
     });
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+var AudioFile = function (){
+    this.length = 0; // Number of samples
+    this.duration = 0; // Time in seconds
+    this.sampleRate = 0; // Sample rate
+    this.channels = 0; // Number of channels
+    this.data = []; //Audio/Waveform data
+};
+
+var audioCtx = null;
+
+class AudioEngine {
+    constructor (){
+        // All of the necessary audio control variables
+        if(!audioCtx){
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+        }
+
+        // Will hold audio data waiting to be played
+        this.buffer = null;
+
+        // This will hold the decoded audio file upon completion
+        this.decodedFile = new AudioFile();
+
+        // Automatically create buffer upon finished decoding?
+        this.autoCreateBuffer = true;
+
+        // Specify this if you want to have a function recieve
+        // the decoded audio, i.e. completionCallback(decodedFile);
+        this.completionCallback = null;
+    }
+
+    // This will decode an audio file
+    fileCallback (event){
+        console.log("file callback");
+        this.buffer = null;
+
+        var reader = new FileReader();
+        var file = event.target.files[0];
+        reader.onload = this.loadCallback.bind(this);
+
+        reader.readAsArrayBuffer(file);
+    }
+
+    // Called by fileCallback after file has been loaded
+    loadCallback (file){
+        console.log("load callback");
+        var raw = file.target.result;
+        audioCtx.decodeAudioData(raw, this.decodeCallback.bind(this));
+    }
+
+    // Called by loadCallback after file has been decoded
+    decodeCallback (data){
+        console.log("decode callback");
+        var audioTemp = new AudioFile();
+
+        audioTemp.length = data.length;
+        audioTemp.duration = data.duration;
+        audioTemp.sampleRate = data.sampleRate;
+        audioTemp.channels = data.numberOfChannels;
+
+        var arr = [];
+        for(var i = 0; i < data.numberOfChannels; i++){
+        arr.push(new Float32Array(data.length));
+        data.copyFromChannel(arr[i], i);
+        }
+
+        audioTemp.data = arr.slice(0);
+        this.decodedFile = audioTemp;
+
+        if(this.autoCreateBuffer){
+        var buffer = audioCtx.createBuffer(audioTemp.channels, audioTemp.length, audioTemp.sampleRate);
+
+        var samples;
+        for(var c = 0; c < audioTemp.channels; c++){
+            samples = buffer.getChannelData(c);
+            for(var i = 0; i < audioTemp.length; i++){
+            samples[i] = this.decodedFile.data[c][i];
+            }
+        }
+
+        this.buffer = buffer;
+        }
+
+        if(this.completionCallback){
+        this.completionCallback(audioTemp);
+        }
+    }
+
+    // Play data that is in buffer
+    play(){
+        if(this.buffer){
+        var source = audioCtx.createBufferSource();
+        var tmp = this.buffer.getChannelData(0);
+
+        source.buffer = this.buffer;
+        source.connect(audioCtx.destination);
+        source.start(0);
+        console.log("play");
+        }
+    }
+}
+
+
+
+
 
 </script>
 
@@ -116,14 +239,7 @@
                 </defs>
                 <g v-for="item in visualizer">
                     <line id='bar' :x1="item.points.p1.x" :y1="item.points.p1.y" :x2="item.points.p2.x" :y2="item.points.p2.y" stroke="url(#gradient1)" style="stroke:url(#gradient1);stroke-width:6">
-                        <animate
-                            
-                            attributeName="x2"
-                            fill="freeze"
-                            :to="item.target"
-                            dur="1s" 
-                            repeatCount="infinite"
-                        />
+                        
                     </line>
                 </g>
             </svg>
