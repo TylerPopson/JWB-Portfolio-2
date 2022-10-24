@@ -57,8 +57,7 @@
                 // visualizer.value[i].points.p1.y += 1;
                 // visualizer.value[i].points.p2.y += 1;
 
-
-                visualizer.value[i].points.p2.x.value = Math.random()*30-15 + Math.sin(i* (Math.PI/25))*100+100 ;
+                visualizer.value[i].points.p2.x.value = (Math.random()*30-15 + Math.sin(i* (Math.PI/25))*100+100) ;
 
                 if(frame !=null){
                     if(visualizer.value[i].points.p1.y.value > frame.clientHeight){
