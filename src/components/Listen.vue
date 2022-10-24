@@ -19,7 +19,13 @@
 
     class bar{
         id: number;
-        points: {p1:{x:Ref<number>, y:Ref<number>}, p2:{x:Ref<number>, y:Ref<number>}};
+        points: {p1:{
+                    x:Ref<number>, 
+                    y:Ref<number>}, 
+                p2:{
+                    x:Ref<number>, 
+                    y:Ref<number>}
+                };
         color: string;
         stepAmount: Ref<number>;
         target:Ref<number> = ref(Math.random()*200);
