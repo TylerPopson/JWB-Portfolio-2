@@ -19,7 +19,7 @@
 
     class bar{
         id: number;
-        points: {p1:point, p2:point};
+        points: {p1:{x:Ref<number>, y:Ref<number>}, p2:{x:Ref<number>, y:Ref<number>}};
         color: string;
         stepAmount: Ref<number>;
         target:Ref<number> = ref(Math.random()*200);
@@ -60,9 +60,11 @@
 
                 visualizer.value[i].points.p2.x.value = Math.random()*30-15 + Math.sin(i* (Math.PI/25))*100+100 ;
 
-                if(visualizer.value[i].points.p1.y.value > frame.clientHeight){
-                    visualizer.value[i].points.p1.y.value = 0;
-                    visualizer.value[i].points.p2.y.value = 0;
+                if(frame !=null){
+                    if(visualizer.value[i].points.p1.y.value > frame.clientHeight){
+                        visualizer.value[i].points.p1.y.value = 0;
+                        visualizer.value[i].points.p2.y.value = 0;
+                    }
                 }
             }
 
@@ -83,8 +85,12 @@
     }
 
     onMounted(() => {
-
-        frame = document.getElementById('frame');
+        try {
+            frame = document.getElementById('frame');
+        } catch (error) {
+            
+        }
+        
         if(frame != null){
             for (let i = 0; i < 100; i++) {
                 visualizer.value.push(new bar(i, i * (frame.clientHeight / 100), "#000000"));
@@ -125,7 +131,7 @@
                     </linearGradient>
                 </defs>
                 <g v-for="item in visualizer">
-                    <line id='bar' :x1="item.points.p1.x" :y1="item.points.p1.y" :x2="item.points.p2.x" :y2="item.points.p2.y" stroke="url(#gradient1)" style="stroke:url(#gradient1);stroke-width:6">
+                    <line id='bar' :x1="item.points.p1.x.value" :y1="item.points.p1.y.value" :x2="item.points.p2.x.value" :y2="item.points.p2.y.value" stroke="url(#gradient1)" style="stroke:url(#gradient1);stroke-width:6">
                         
                     </line>
                 </g>
