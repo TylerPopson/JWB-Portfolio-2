@@ -11,7 +11,7 @@
         transition-all hover:text-white
     }
     .visualizer-bar{
-        @apply bg-slate-500 w-full h-1/6 md:h-5 animate-bar origin-left mb-1 md:mb-2
+        @apply bg-moog-black w-full h-1/6 md:h-5 animate-bar origin-left mb-1 md:mb-2
     }
 }
 
