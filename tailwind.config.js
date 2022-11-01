@@ -7,6 +7,15 @@ module.exports = {
   theme: {
     
     extend: {
+      keyframes:{
+        slide:{
+          '0%, 100%':{transform: 'scaleX(0)'},
+          '50%':{transform: 'scalex(1)'},
+        }
+      },
+      animation:{
+        'bar':'slide 2s ease-in-out infinite',
+      },
       colors: {
         'moog-lavender': '#F2DCF1',
         'moog-blue': '#B0D1D9',

@@ -1,107 +1,9 @@
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
     import type { Ref } from 'vue';
-    type point = {x: Ref<number>, y: Ref<number>};
-
-    const variance:number = 100;
-    const visualizer: Ref<bar[]> = ref([]);
-    let frame:HTMLElement | null = null;
-    let fps: number = 10;
-    let now: any;
-    let then: any = Date.now();
-    let interval: number = 1000/fps;
-    let delta: number;
-    let animateElem = document.querySelector('animate');
-
-    let elapsed: number = 0;
-    let screenW: number = window.innerWidth;
-    
-
-    class bar{
-        id: number;
-        points: {p1:{
-                    x:Ref<number>, 
-                    y:Ref<number>}, 
-                p2:{
-                    x:Ref<number>, 
-                    y:Ref<number>}
-                };
-        color: string;
-        stepAmount: Ref<number>;
-        target:Ref<number> = ref(Math.random()*200);
-
-        constructor(id:number, height:number, color:string){
-            this.points = {
-                p1: {x: ref(0), y: ref(height)},
-                p2: {x: ref(Math.random()*300-150), y: ref(height)}
-            }
-
-            this.color = color;
-
-            this.stepAmount = ref(0);
-
-            this.id = id;
-        }
-
-        randomize = () => {
-            
-            this.target.value = Math.random()*200;
-        }
-    }
-
-    function animateVisualizer(){
-
-        now = Date.now();
-        delta = now - then;
-
-        elapsed += delta;
-        //visualizerUpdateCounter += delta;
-
-        if (elapsed >= interval) {
-
-            for (let i: number = 0; i<visualizer.value.length; i++){
-                // visualizer.value[i].points.p1.y += 1;
-                // visualizer.value[i].points.p2.y += 1;
-
-                visualizer.value[i].points.p2.x.value = (Math.random()*30-15 + Math.sin(i* (Math.PI/25))*100+100) ;
-
-                if(frame !=null){
-                    if(visualizer.value[i].points.p1.y.value > frame.clientHeight){
-                        visualizer.value[i].points.p1.y.value = 0;
-                        visualizer.value[i].points.p2.y.value = 0;
-                    }
-                }
-            }
-
-            elapsed = 0;
-
-        }
-
-        then = now;
-        requestAnimationFrame(animateVisualizer);
-    }
-
-    function rand(){
-        console.log("here");
-        for (let i: number = 0; i<visualizer.value.length; i++){
-                 visualizer.value[i].target.value = Math.random()*200;
-                
-            }
-    }
 
     onMounted(() => {
-        try {
-            frame = document.getElementById('frame');
-        } catch (error) {
-            
-        }
         
-        if(frame != null){
-            for (let i = 0; i < 100; i++) {
-                visualizer.value.push(new bar(i, i * (frame.clientHeight / 100), "#000000"));
-            }
-            animateVisualizer();
-        }
     });
 
 </script>
@@ -110,8 +12,8 @@
     <div id="listen" class="flex flex-col-reverse md:flex-row w-screen h-auto md:h-screen bg-moog-black">
         <div class="flex flex-col w-screen md:w-2/3 px-5 md:px-32 my-10 md:my-0 h-full bg-moog-black items-center justify-center">
 
-            <iframe class="" style="border-radius:12px" src="https://open.spotify.com/embed/album/5FCefVJ1ACpDxruisklkE3?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="true"></iframe>
-            <iframe class="" style="border-radius:12px" src="https://open.spotify.com/embed/album/5PJspByunI4lcrEwcOcvv4?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="true"></iframe>
+            <iframe class="" style="border-radius:12px" src="https://open.spotify.com/embed/album/5FCefVJ1ACpDxruisklkE3?utm_source=generator" width="100%" height="380" allowfullscreen="true"></iframe>
+            <iframe class="" style="border-radius:12px" src="https://open.spotify.com/embed/album/5PJspByunI4lcrEwcOcvv4?utm_source=generator" width="100%" height="380" allowfullscreen="true"></iframe>
             
             <div class="flex flex-col md:flex-row w-full items-center justify-center">
 
@@ -127,23 +29,135 @@
         </div>
 
         <div id="frame" class="flex relative w-screen md:w-1/3 h-32 md:h-full bg-moog-lavender items-center justify-center">
-            <svg v-if="screenW >= 768" class="flex absolute left-0 top-0 h-full w-2/5 bg-blue" height="100%" width="33%">
-                <defs>
-                    <linearGradient id='gradient1' x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" style="stop-color:#010d00;" />
-                        <!-- <stop offset="75%" style="stop-color:#B0D1D9;" /> -->
-                        <stop offset="75%" style="stop-color:#BF9663;" />
-                    </linearGradient>
-                </defs>
-                <g v-for="item in visualizer">
-                    <line id='bar' :x1="item.points.p1.x.value" :y1="item.points.p1.y.value" :x2="item.points.p2.x.value" :y2="item.points.p2.y.value" stroke="url(#gradient1)" style="stroke:url(#gradient1);stroke-width:6">
-                        
-                    </line>
-                </g>
-            </svg>
+            <div v-if="1" class="visualizer h-full w-1/3 absolute left-0 top-0 overflow-hidden">
+                <div v-for="n in 40" class="visualizer-bar"></div>
+            </div>
             <h1 class="text-4xl font-overpassBold">Listen</h1>
         </div>
 
     </div>
     
 </template>
+
+<style scoped>
+    .visualizer div:nth-child(1){
+        animation-delay: -100ms;
+    }
+    .visualizer div:nth-child(2){
+        animation-delay: -200ms;
+    }
+    .visualizer div:nth-child(3){
+        animation-delay: -300ms;
+    }
+    .visualizer div:nth-child(4){
+        animation-delay: -400ms;
+    }
+    .visualizer div:nth-child(5){
+        animation-delay: -500ms;
+    }
+    .visualizer div:nth-child(6){
+        animation-delay: -600ms;
+    }
+    .visualizer div:nth-child(7){
+        animation-delay: -700ms;
+    }
+    .visualizer div:nth-child(8){
+        animation-delay: -800ms;
+    }
+    .visualizer div:nth-child(9){
+        animation-delay: -900ms;
+    }
+    .visualizer div:nth-child(10){
+        animation-delay: -1000ms;
+    }
+    .visualizer div:nth-child(11){
+        animation-delay: -1100ms;
+    }
+    .visualizer div:nth-child(12){
+        animation-delay: -1200ms;
+    }
+    .visualizer div:nth-child(13){
+        animation-delay: -1300ms;
+    }
+    .visualizer div:nth-child(14){
+        animation-delay: -1400ms;
+    }
+    .visualizer div:nth-child(15){
+        animation-delay: -1500ms;
+    }
+    .visualizer div:nth-child(16){
+        animation-delay: -1600ms;
+    }
+    .visualizer div:nth-child(17){
+        animation-delay: -1700ms;
+    }
+    .visualizer div:nth-child(18){
+        animation-delay: -1800ms;
+    }
+    .visualizer div:nth-child(19){
+        animation-delay: -1900ms;
+    }
+    .visualizer div:nth-child(20){
+        animation-delay: -0ms;
+    }
+    .visualizer div:nth-child(21){
+        animation-delay: -100ms;
+    }
+    .visualizer div:nth-child(22){
+        animation-delay: -200ms;
+    }
+    .visualizer div:nth-child(23){
+        animation-delay: -300ms;
+    }
+    .visualizer div:nth-child(24){
+        animation-delay: -400ms;
+    }
+    .visualizer div:nth-child(25){
+        animation-delay: -500ms;
+    }
+    .visualizer div:nth-child(26){
+        animation-delay: -600ms;
+    }
+    .visualizer div:nth-child(27){
+        animation-delay: -700ms;
+    }
+    .visualizer div:nth-child(28){
+        animation-delay: -800ms;
+    }
+    .visualizer div:nth-child(29){
+        animation-delay: -900ms;
+    }
+    .visualizer div:nth-child(30){
+        animation-delay: -1000ms;
+    }
+    .visualizer div:nth-child(31){
+        animation-delay: -1100ms;
+    }
+    .visualizer div:nth-child(32){
+        animation-delay: -1200ms;
+    }
+    .visualizer div:nth-child(33){
+        animation-delay: -1300ms;
+    }
+    .visualizer div:nth-child(34){
+        animation-delay: -1400ms;
+    }
+    .visualizer div:nth-child(35){
+        animation-delay: -1500ms;
+    }
+    .visualizer div:nth-child(36){
+        animation-delay: -1600ms;
+    }
+    .visualizer div:nth-child(37){
+        animation-delay: -1700ms;
+    }
+    .visualizer div:nth-child(38){
+        animation-delay: -1800ms;
+    }
+    .visualizer div:nth-child(39){
+        animation-delay: -1900ms;
+    }
+    .visualizer div:nth-child(40){
+        animation-delay: -0ms;
+    }
+</style>
