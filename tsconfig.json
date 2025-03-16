@@ -7,7 +7,7 @@
       "@/*": ["./src/*"]
     }
   },
-
+  "jsxImportSource": "vue",
   "references": [
     {
       "path": "./tsconfig.config.json"
