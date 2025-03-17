@@ -58,26 +58,6 @@ onMounted(() => {});
                     >Jordan Burger - Portfolio</a
                 >
             </div>
-            <div
-                class="flex flex-col md:flex-row w-full items-center justify-center"
-            >
-                <div
-                    class="text-white font-overpassBold w-full md:w-1/2 text-center text-5xl"
-                >
-                    <h1>Listen On Soundcloud:</h1>
-                </div>
-
-                <a
-                    href="https://soundcloud.com/jordan-burger-474132049"
-                    target="_blank"
-                    class="text-white hover:text-moog-blue w-full md:w-1/2 text-center text-9xl transition-colors duration-300"
-                >
-                    <font-awesome-icon
-                        icon="fa-brands fa-soundcloud"
-                        class=""
-                    />
-                </a>
-            </div>
         </div>
 
         <div
